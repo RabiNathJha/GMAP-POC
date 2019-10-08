@@ -1,9 +1,14 @@
 import React from 'react';
-import SimpleMap from './SimpleMap';
+
+import MapService from '../../services';
+import Map from '../Map';
 
 const Home = () => {
+    
     return(
-        <SimpleMap />
+        <Map
+            service={new MapService()}
+        />
     );
 };
 
