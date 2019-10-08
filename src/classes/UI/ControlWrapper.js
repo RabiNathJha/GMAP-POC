@@ -25,10 +25,6 @@ class ControlWrapper {
             controlWrapper.appendChild(children);
             controlWrapper.appendChild(document.createElement('div'));
         })
-        // controlWrapper.appendChild(childrens[0]);
-        // controlWrapper.appendChild(document.createElement('div'));
-        // controlWrapper.appendChild(childrens[1]);
-
         placeControlPanel(controlWrapper);
     }
 }

@@ -45,12 +45,15 @@ class Markers {
         }, (results, status) => {
             if (status === 'OK') {
                 const postalCode = results[0].address_components.filter(addObj => addObj.types[0] === 'postal_code');
-                
                 infoWindow.setContent(
                     `<div>
                         <h4 class='postal'>
                         Postal Code: <span>${(postalCode[0])? postalCode[0].short_name : 'N/A'}</span>
                         </h4>
+                        <div class='latlng'>
+                            <strong>Lat:</strong>${location.lat}
+                            <strong>Lng:</strong>${location.lng}
+                        </div>
                         <span>
                         <strong>Created On:</strong>
                         <span class='time'>${(createdOn) ? createdOn : new Date()}<span>

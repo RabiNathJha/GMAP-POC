@@ -35,7 +35,7 @@ class MyGMap extends Component {
 
     mapOnClickAddMarker = (map, marker) => {
       new window.google.maps.event.addListener(map, 'click', (event) => {
-        marker.addMarker(event.latLng);
+        marker.addMarker(event.latLng.toJSON());
       });
     }
 
