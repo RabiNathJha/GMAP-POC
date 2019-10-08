@@ -1,87 +1,51 @@
-import React, { Component } from 'react';
-import { loadGMap } from '../../helpers';
-import './map.css';
+import React, { Component, createRef } from 'react';
 
+import Maploader from './MapLoader';
+import mapConfig from './map.config';
+import Markers from '../Markers';
+import DataLayer from '../DataLayer';
+import GeoJsonLoader from './GeoJsonLoader';
 class MyGMap extends Component {
     
+    gmapRef = createRef(null);
+
     componentDidMount() {
-        loadGMap(`https://maps.googleapis.com/maps/api/js?key=${process.env.GMAP_SECRET_KEY}&callback=initMap`);
-        window.initMap = this.initMap
+      new Maploader(this.mapOnLoad)
     }
 
-    initMap = () => {
-        const map = new window.google.maps.Map(document.getElementById('map'), {
-            center: {lat: 26.6800, lng: 88.3662},
-            zoom: 8
-          })
+    mapOnLoad = () => {
+        const map = new window.google.maps.Map(this.gmapRef.current, mapConfig)
+        
+        const { service } = this.props;
+        const marker = new Markers(map);
 
-        this.displaySavedMarkers(map);
+        this.mapOnClickAddMarker(map, marker);
+        marker.displaySavedMarkers(service);
 
-        new window.google.maps.event.addListener(map, 'click', (event) => {
-          this.addMarker(event.latLng, map);
-        });
+        new GeoJsonLoader().getContourDataSet()
+        .then(({data}) => {
+          const dataLayer = new DataLayer(map, data);
+          dataLayer.displayControls();
+        })
+        .catch((error) => alert(`Unable to fetch jeo json: ${error}`))
 
     }
 
-    displaySavedMarkers = (map) => {
-      this.props.service.getMarkers()
-      .then(markers => {
-        markers.forEach(({location, createdOn}) => {
-          this.addMarker(location, map, createdOn)
-        });
-      })
-      .catch(error => alert(`Unable to fetch saved markers: ${error}`))
-      
-    }
 
-    addMarker = (location, map, createdOn) => {
-
-      const marker = new window.google.maps.Marker({
-        position: location,
-        map: map
+    mapOnClickAddMarker = (map, marker) => {
+      new window.google.maps.event.addListener(map, 'click', (event) => {
+        marker.addMarker(event.latLng);
       });
-
-      //show infowindow onclick marker
-      const infoWindow = new window.google.maps.InfoWindow();
-      this.setLocationDetailsToInfoWin(location, infoWindow, createdOn);
-
-
-      marker.addListener('click', function() {
-        infoWindow.open(map, marker);
-      });
-
-    }
-
-    setLocationDetailsToInfoWin = (location, infoWindow, createdOn) => {
-      const geoCoder = new window.google.maps.Geocoder();
-
-      geoCoder.geocode({'location': location}, (results, status) => {
-        if(status === 'OK') {
-          const postalCode = results[0].address_components.filter(addObj => addObj.types[0] === 'postal_code');
-          
-          infoWindow.setContent(
-            `<div>
-                <h4 class='postal'>
-                  Postal Code: <span>${(postalCode[0])? postalCode[0].short_name : 'N/A'}</span>
-                </h4>
-                <span>
-                  <strong>Created On:</strong>
-                  <span class='time'>${(createdOn) ? createdOn : new Date()}<span>
-                </span>
-              </div>`
-            )
-        }
-        else{
-          alert(`Request failed, details: ${status}`)
-        }
-      })
-
     }
 
     render() {
         return (
           <main>
-            <div id="map" style={{height:'100vh'}}></div>
+            <div
+              ref={this.gmapRef}
+              style={{height:'100vh'}}
+            >
+            </div>
           </main>
         )
       }
