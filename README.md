@@ -18,7 +18,7 @@ _Have another more specific idea? You may want to check out our vibrant collecti
 1.  **npm commands to start and build project**
   - **npm install**
   - **npm start**
-  - **npm build**
+  - **npm run build**
 
 1.  **Create a Gatsby site.**
 
