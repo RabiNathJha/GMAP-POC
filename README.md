@@ -5,7 +5,7 @@
   </a>
 </p>
 <h1 align="center">
-  GMAP POC
+  GMAP POC in REACT
 </h1>
 - Markers
 - JeoJson
