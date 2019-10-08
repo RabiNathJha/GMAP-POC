@@ -90,7 +90,7 @@ class DataLayer {
         const elevations = this.getAllElevation();
 
         const minMax = {
-            min: Math.min(...elevations),
+            min: Math.min(...elevations)-1,
             max: Math.max(...elevations)
         }
 

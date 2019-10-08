@@ -1,16 +1,15 @@
 import React, { Component, createRef } from 'react';
 
-import Maploader from './MapLoader';
 import mapConfig from './map.config';
-import Markers from '../Markers';
-import DataLayer from '../DataLayer';
-import GeoJsonLoader from './GeoJsonLoader';
+import Markers from '../../classes/Markers';
+import DataLayer from '../../classes/DataLayer';
+import { GeoJsonLoader, MapLoader } from '../../classes/Loader';
 class MyGMap extends Component {
     
     gmapRef = createRef(null);
 
     componentDidMount() {
-      new Maploader(this.mapOnLoad)
+      new MapLoader(this.mapOnLoad)
     }
 
     mapOnLoad = () => {
