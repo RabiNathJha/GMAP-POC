@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react';
+import PropTypes from 'prop-types';
 
 import mapConfig from './map.config';
 import Markers from '../../classes/Markers';
@@ -7,6 +8,13 @@ import { GeoJsonLoader, MapLoader } from '../../classes/Loader';
 class MyGMap extends Component {
     
     gmapRef = createRef(null);
+
+    static propTypes = {
+      service: PropTypes.shape({
+          getMarkers: PropTypes.func.isRequired,
+          saveMarkers: PropTypes.func.isRequired,
+      }),
+    }
 
     componentDidMount() {
       new MapLoader(this.mapOnLoad)
@@ -18,7 +26,7 @@ class MyGMap extends Component {
         const { service } = this.props;
         const marker = new Markers(map);
 
-        //get saved markers and render on map
+        //get saved markers and render over map
         this.mapOnClickAddMarker(map, marker);
         marker.displaySavedMarkers(service);
 

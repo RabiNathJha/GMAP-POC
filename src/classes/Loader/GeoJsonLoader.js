@@ -3,7 +3,7 @@ import axios from 'axios';
 class GeoJsonLoader {
 
     getContourDataSet() {
-        return axios.get(`${process.env.CONTOUR_URL}`)
+        return axios.get(`${process.env.CONTOUR_URL}`);
     }
 };
 

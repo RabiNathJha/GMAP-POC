@@ -15,7 +15,6 @@
     "gatsby-source-filesystem": "^2.1.29",
     "gatsby-transformer-sharp": "^2.2.20",
     "google-map-react": "^1.1.5",
-    "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1"
@@ -24,7 +23,8 @@
     "eslint-config-react-app": "^5.0.2",
     "gatsby-cli": "^2.7.56",
     "gatsby-plugin-env-variables": "^1.0.1",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "prop-types": "^15.7.2"
   },
   "keywords": [
     "gatsby"
