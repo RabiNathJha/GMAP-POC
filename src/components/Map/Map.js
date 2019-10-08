@@ -15,13 +15,26 @@ class MyGMap extends Component {
             zoom: 8
           })
 
+        this.displaySavedMarkers(map);
+
         new window.google.maps.event.addListener(map, 'click', (event) => {
           this.addMarker(event.latLng, map);
         });
 
     }
 
-    addMarker = (location, map) => {
+    displaySavedMarkers = (map) => {
+      this.props.service.getMarkers()
+      .then(markers => {
+        markers.forEach(({location, createdOn}) => {
+          this.addMarker(location, map, createdOn)
+        });
+      })
+      .catch(error => alert(`Unable to fetch saved markers: ${error}`))
+      
+    }
+
+    addMarker = (location, map, createdOn) => {
 
       const marker = new window.google.maps.Marker({
         position: location,
@@ -30,7 +43,7 @@ class MyGMap extends Component {
 
       //show infowindow onclick marker
       const infoWindow = new window.google.maps.InfoWindow();
-      this.setLocationDetailsToInfoWin(location, infoWindow);
+      this.setLocationDetailsToInfoWin(location, infoWindow, createdOn);
 
 
       marker.addListener('click', function() {
@@ -39,7 +52,7 @@ class MyGMap extends Component {
 
     }
 
-    setLocationDetailsToInfoWin = (location, infoWindow) => {
+    setLocationDetailsToInfoWin = (location, infoWindow, createdOn) => {
       const geoCoder = new window.google.maps.Geocoder();
 
       geoCoder.geocode({'location': location}, (results, status) => {
@@ -52,8 +65,8 @@ class MyGMap extends Component {
                   Postal Code: <span>${(postalCode[0])? postalCode[0].short_name : 'N/A'}</span>
                 </h4>
                 <span>
-                  <strong>Created time:</strong>
-                  <span class='time'>${new Date()}<span>
+                  <strong>Created On:</strong>
+                  <span class='time'>${(createdOn) ? createdOn : new Date()}<span>
                 </span>
               </div>`
             )

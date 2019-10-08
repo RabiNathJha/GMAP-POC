@@ -1,4 +1,4 @@
 export const markerData = [
-    {"lat": 26.6800, "lng": 88.3662},
-    {"lat": 26.6900, "lng": 88.3762}
+    {location:{"lat": 26.68, "lng": 88.36}, createdOn:new Date()},
+    {location:{"lat": 19.0760, "lng": 72.8777}, createdOn:new Date()}
 ];
