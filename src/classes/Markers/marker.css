@@ -1,5 +1,6 @@
 .postal {
    margin: 0px 0px 3px 0px;
+   font-weight: 500;
 }
 .time {
     font-style: oblique;
@@ -7,5 +8,6 @@
 }
 
 .latlng{
+    margin-top: 3px;
     margin-bottom: 3px;
 }

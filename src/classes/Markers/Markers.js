@@ -44,11 +44,13 @@ class Markers {
             'location': location
         }, (results, status) => {
             if (status === 'OK') {
-                const postalCode = results[0].address_components.filter(addObj => addObj.types[0] === 'postal_code');
+                const postalAddress = results[0].formatted_address
                 infoWindow.setContent(
                     `<div>
-                        <h4 class='postal'>
-                        Postal Code: <span>${(postalCode[0])? postalCode[0].short_name : 'N/A'}</span>
+                        <span class='postal'>
+                        Address:
+                        </span>
+                        <span>${postalAddress}</span>
                         </h4>
                         <div class='latlng'>
                             <strong>Lat:</strong>${location.lat}
