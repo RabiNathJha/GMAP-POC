@@ -19,9 +19,11 @@ class MyGMap extends Component {
         const { service } = this.props;
         const marker = new Markers(map);
 
+        //get saved markers and render on map
         this.mapOnClickAddMarker(map, marker);
         marker.displaySavedMarkers(service);
 
+        //fetch dataset and display control panel
         new GeoJsonLoader().getContourDataSet()
         .then(({data}) => {
           const dataLayer = new DataLayer(map, data);

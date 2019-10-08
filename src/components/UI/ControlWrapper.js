@@ -13,7 +13,7 @@ class ControlWrapper {
         label.innerHTML = 'Control Panel:';
 
         controlWrapper.style.backgroundColor = 'rgba(255,255,255,0.75)';
-        controlWrapper.style.width = '220px';
+        controlWrapper.style.width = '250px';
         controlWrapper.style.padding = '10px 10px 15px 30px';
         controlWrapper.style.border = '3px solid grey';
         controlWrapper.style.marginLeft = '-65px';

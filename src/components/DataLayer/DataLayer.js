@@ -23,7 +23,7 @@ class DataLayer {
 
     getDataLayerStyle = (styleObj) => (
         {
-            strokeColor: 'yellow',
+            strokeColor: '#1e88e5',
             strokeWeight: 2,
             strokeOpacity: this.strokeOpacity,
             ...styleObj
