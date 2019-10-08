@@ -5,7 +5,7 @@ import mapConfig from './map.config';
 import Markers from '../../classes/Markers';
 import DataLayer from '../../classes/DataLayer';
 import { GeoJsonLoader, MapLoader } from '../../classes/Loader';
-class MyGMap extends Component {
+class Map extends Component {
     
     gmapRef = createRef(null);
 
@@ -60,4 +60,4 @@ class MyGMap extends Component {
       }
 };
 
-export default MyGMap;
+export default Map;
