@@ -13,7 +13,7 @@ class Button {
         visibilityButton.setAttribute('id','button');
         visibilityButton.style.fontSize = '9px';
         visibilityButton.style.padding = '7px';
-        visibilityButton.style.backgroundColor = '#00897b';
+        visibilityButton.style.backgroundColor = '#add8e6';
         visibilityButton.style.fontWeight = '600';
         visibilityButton.style.border = '0px solid grey';
         visibilityButton.style.borderRadius = '17px'
@@ -25,7 +25,7 @@ class Button {
         wrapper.appendChild(label);
         wrapper.appendChild(visibilityButton)
 
-        onClick(wrapper);
+        onClick(visibilityButton);
 
         return wrapper;
     }
